@@ -1,0 +1,16 @@
+{
+	"object": "set",
+	"id": "4887d21f-71e7-4d7a-a079-e9521fd7e6d7",
+	"code": "ss3",
+	"tcgplayer_id": 2633,
+	"name": "Signature Spellbook: Chandra",
+	"uri": "https://api.scryfall.com/sets/4887d21f-71e7-4d7a-a079-e9521fd7e6d7",
+	"scryfall_uri": "https://scryfall.com/sets/ss3",
+	"search_uri": "https://api.scryfall.com/cards/search?order=set&q=e%3Ass3&unique=prints",
+	"released_at": "2020-06-26",
+	"set_type": "spellbook",
+	"card_count": 2,
+	"digital": false,
+	"foil_only": false,
+	"icon_svg_uri": "https://img.scryfall.com/sets/default.svg?1585540800"
+}

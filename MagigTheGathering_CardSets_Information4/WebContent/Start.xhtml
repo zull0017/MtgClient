@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:b="http://bootsfaces.net/ui">
+
+<h:head></h:head>
+<h:body>
+
+	<h:form id="form">
+		<b:container>
+			<h1>Magic The Gathering Expansions Information</h1>
+			<p:dataTable id="singleDT" var="set" value="#{mtgBean.expList}"
+				selectionMode="single" selection="#{mtgBean.selectedSet}"
+				rowKey="#{set.id}">
+
+				<p:column headerText="SetIcon" resizable="true">
+					<p:graphicImage rendered="true" width="10%"
+						value="#{set.iconSvgUri}" />
+				</p:column>
+
+				<p:column headerText="Type" sortBy="#{set.setType}">
+					<h:outputText value="#{set.setType}" />
+				</p:column>
+
+				<p:column headerText="Name" sortBy="#{set.name}">
+					<h:outputText value="#{set.name}" />
+				</p:column>
+
+				<p:column headerText="ReleaseDate" sortBy="#{set.releasedAt}">
+					<h:outputText value="#{set.releasedAt}" />
+				</p:column>
+
+				<p:column headerText="CardCount" sortBy="#{set.cardCount}">
+					<h:outputText value="#{set.cardCount}" />
+				</p:column>
+
+				<p:column style="width:32px;text-align: center">
+				<h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
+					<p:commandButton update=":form:setDetail"
+						oncomplete="PF('setDialog').show()" icon="info"
+						title="Details">
+						<f:setPropertyActionListener value="#{set}"
+							target="#{mtgBean.selectedSet}" />
+					</p:commandButton>
+				</p:column>
+
+			</p:dataTable>
+
+
+			<p:dialog header="Set Info" widgetVar="setDialog" modal="true"
+				showEffect="fade" hideEffect="fade" resizable="false">
+
+				<p:outputPanel id="setDetail" style="text-align:center;">
+					<p:panelGrid columns="2" rendered="true"
+						columnClasses="label,value">
+
+						<h:outputText value="View All Cards:" />
+						<h:commandLink  value="#{mtgBean.selectedSet.scryfallUri}" action="#{mtgBean.redirectScryfall}" />
+
+						<h:outputText value="Api URL:" />
+						<h:commandLink  value="#{mtgBean.selectedSet.uri}" action="#{mtgBean.redirectUrl}" />
+					
+						<h:outputText value="Foil Version:" />
+						<h:outputText value="#{mtgBean.selectedSet.foilOnly}" />
+						
+						<h:outputText value="Mtg Arena Online:" />
+						<h:outputText value="#{mtgBean.selectedSet.digital}" />
+						
+						<h:outputText value="Cardset Symbol:" />
+						<p:graphicImage rendered="true" width="10%"
+						value="#{mtgBean.selectedSet.iconSvgUri}" />
+						
+						<h:outputText value="Cardset Code:" />
+						<h:outputText value="#{mtgBean.selectedSet.code}" />
+						
+						<h:outputText value="Tcg Player Id:" />
+						<h:outputText value="#{mtgBean.selectedSet.tcgplayerId}" />
+
+					</p:panelGrid>
+				</p:outputPanel>
+			</p:dialog>
+
+		</b:container>
+	</h:form>
+</h:body>
+</html>
